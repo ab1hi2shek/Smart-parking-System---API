@@ -1,0 +1,20 @@
+{
+  "name": "sps-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node",
+    "restful",
+    "api",
+    "SPS"
+  ],
+  "author": "Abhishek kumar",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
