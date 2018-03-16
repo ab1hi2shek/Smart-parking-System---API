@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 
 const parkingSchema = mongoose.Schema({
-    _id: String,
-    name: String,
-    lattitude: String,
-    longitude: String,
-    total_parking_space: Number,
-    free_parking_space: Number,
+    _id: { type: String, required: true },
+    name: { type: String, required: true },
+    lattitude: { type: String, required: true },
+    longitude: { type: String, required: true },
+    total_parking_space: { type: Number, required: true },
+    free_parking_space: { type: Number, required: true },
     neighbours_Ids: [{type: String}]
 });
 

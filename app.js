@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const parkingRoutes = require('./api/routes/parkings');
 const shortestDistanceRoutes = require('./api/routes/shortestDistance');
 const ourAlgorithmRoutes = require('./api/routes/ourAlgorithm');
+const userRoutes = require('./api/routes/user');
 
 //using mongoose
 var url = 'mongodb://abhishek:' + process.env.MONGO_ATLAS_PW + '@sps-node-rest-api-shard-' + 
@@ -15,9 +16,8 @@ var url = 'mongodb://abhishek:' + process.env.MONGO_ATLAS_PW + '@sps-node-rest-a
     'rest-api-shard-00-01-n5dll.mongodb.net:27017,sps-node-rest-api-shard-00-02-' + 
     'n5dll.mongodb.net:27017/test?ssl=true&replicaSet=SPS-node-rest-api-shard-0&authSource=admin';
 
-mongoose.connect(url, {
-  useMongoClient: true
-});
+mongoose.connect(url);
+mongoose.Promise = global.Promise;
 
 //using middleware
 app.use(morgan('dev'));
@@ -42,6 +42,7 @@ app.use((req, res, next) => {
 app.use('/parkings', parkingRoutes);
 app.use('/shortest-dist', shortestDistanceRoutes);
 app.use('/our-algo', ourAlgorithmRoutes);
+app.use("/user", userRoutes);
 
 app.use((req, res, next) => {
 	const error = new Error('Page not found');
