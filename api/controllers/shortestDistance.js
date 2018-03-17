@@ -7,11 +7,11 @@ exports.get_parking = (req, res, next) => {
     Parking.find()
     .exec()
     .then(parkings => {
-      console.log(parkings);
+    	console.log(parkings);
 
-      let resultParking = {};
-      let minmDist = 10000000;
-      parkings.forEach(function(item){
+      	let resultParking = {};
+      	let minmDist = process.env.maximum;
+      	parkings.forEach(function(item){
       		lat1 = req.query.lattitude,
       		lon1 = req.query.longitude,
       		lat2 = item.lattitude,
@@ -22,17 +22,20 @@ exports.get_parking = (req, res, next) => {
       			minmDist = currDist;
       			resultParking = item;
       		}
-      });
+      	});
 
-      res.status(200).json({
-      	optimalParking: resultParking,
-      	distance: minmDist
-      });
+      	res.status(200).json({
+      		message: "Success",
+      		minimumDistanceParking: resultParking,
+      		minimumDistance: minmDist
+      	});
     })
+
     .catch(err => {
-      console.log(err);
-      res.status(500).json({
-        error: err
-      });
+      	console.log(err);
+      	res.status(500).json({
+      		message: "Failure",
+        	error: err
+      	});
     });
 };

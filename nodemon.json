@@ -1,6 +1,9 @@
 {
 	"env": {
 		"MONGO_ATLAS_PW": "abhishek3101",
-		"JWT_KEY": "SPS@tylerDurden"
+		"JWT_KEY": "SPS@tylerDurden",
+		"maximum": 999999999,
+		"max_parking_space": 200,
+		"max_distance": 6.652102562117762
 	}
 }

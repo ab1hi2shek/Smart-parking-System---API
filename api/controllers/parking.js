@@ -6,11 +6,15 @@ exports.parkings_get_all = (req, res, next) => {
     .exec()
     .then(parkings => {
       console.log(parkings);
-      res.status(200).json(parkings);
+      res.status(200).json({
+        message: "Success",
+        parkings: parkings
+      });
     })
     .catch(err => {
       console.log(err);
       res.status(500).json({
+        message: "Failure",
         error: err
       });
     });
@@ -32,13 +36,14 @@ exports.parking_add_new = (req, res, next) => {
     .then(result => {
       console.log(result);
       res.status(201).json({
-        message: "Handling POST requests to /products",
-        createdProduct: result
+        message: "Success",
+        addedParking: result
       });
     })
     .catch(err => {
       console.log(err);
       res.status(500).json({
+        message: "Failure",
         error: err
       });
     });
@@ -49,11 +54,39 @@ exports.parking_delete_one = (req, res, next) => {
   Parking.remove({ _id: id })
     .exec()
     .then(result => {
-      res.status(200).json(result);
+      res.status(200).json({
+        message: "success",
+        deletedParking: result
+      });
     })
     .catch(err => {
       console.log(err);
       res.status(500).json({
+        message: "Failure",
+        error: err
+      });
+    });
+};
+
+exports.parking_update_one = (req, res, next) => {
+  const id = req.params.parkingId;
+  const updateOps = {};
+  for (const ops of req.body) {
+    updateOps[ops.propName] = ops.value;
+  }
+
+  Parking.update({ _id: id }, { $set: updateOps })
+    .exec()
+    .then(result => {
+      res.status(200).json({
+          message: "Success",
+          updatedParking: result
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        message: "Failure",
         error: err
       });
     });
