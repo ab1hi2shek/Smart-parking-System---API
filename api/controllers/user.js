@@ -77,6 +77,8 @@ exports.login_user = (req, res, next) => {
           );
           return res.status(200).json({
             message: "Success",
+            name: user[0].name,
+            email: user[0].email,
             token: token
           });
         }
@@ -107,6 +109,25 @@ exports.delete_user = (req, res, next) => {
       console.log(err);
       res.status(500).json({
       	message: "Failure",
+        error: err
+      });
+    });
+};
+
+exports.users_get_all = (req, res, next) => {
+  User.find()
+    .exec()
+    .then(users => {
+      console.log(users);
+      res.status(200).json({
+        message: "Success",
+        users: users
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        message: "Failure",
         error: err
       });
     });
