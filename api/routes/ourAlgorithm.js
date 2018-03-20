@@ -4,6 +4,6 @@ const checkAuth = require('../middleware/check-auth');
 
 const ourAlgorithmController = require('../controllers/ourAlgorithm');
 
-router.get('/', checkAuth, ourAlgorithmController.get_parking);
+router.get('/', ourAlgorithmController.get_parking);
 
 module.exports = router;
