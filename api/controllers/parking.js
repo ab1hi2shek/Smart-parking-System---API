@@ -104,7 +104,7 @@ exports.parking_delete_one = (req, res, next) => {
 };
 
 exports.parking_update_one = (req, res, next) => {
-  const id = req.params.parkingId;
+  const id = req.params._id;
   const updateOps = {};
   for (const ops of req.body) {
     updateOps[ops.propName] = ops.value;

@@ -17,7 +17,7 @@ module.exports = {
 			"lattitude":"23.567970",
 			"longitude":"87.304977",
 			"total_parking_space":100,
-			"free_parking_space":70
+			"free_parking_space":50
 		},
 
 		{

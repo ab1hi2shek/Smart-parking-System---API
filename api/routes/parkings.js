@@ -9,7 +9,7 @@ router.get("/", parkingController.parkings_get_all);
 
 router.post("/", parkingController.parking_add_new);
 
-router.patch("/:parkingId", parkingController.parking_update_one)
+router.patch("/:_id", parkingController.parking_update_one)
 
 router.delete("/:parkingId", parkingController.parking_delete_one);
 
