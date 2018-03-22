@@ -1,5 +1,40 @@
 const Parking = require("../models/parking");
 const mongoose = require("mongoose");
+const tools = require("../consts/defaultParking");
+
+exports.parking_reset_to_default = (req, res, next) => {
+  Parking.find()
+    .exec()
+    .then(parkings => {
+      parkings.forEach(function(item){
+        Parking.remove({ _id: item._id })
+        .exec()
+      })
+
+      tools.defaultParking.forEach(function(item){
+          const parking = new Parking({
+              _id: item._id,
+              name: item.name,
+              lattitude: item.lattitude,
+              longitude: item.longitude,
+              total_parking_space: item.total_parking_space,
+              free_parking_space: item.free_parking_space,
+              neighbours_Ids: item.neighbours_Ids
+          });
+          parking
+            .save()
+      });
+      res.status(200).json({
+        message: "Success"
+      });
+    })
+    .catch(err => {
+        res.status(500).json({
+          message: "Failure",
+          error: err
+        });
+    });
+}
 
 exports.parkings_get_all = (req, res, next) => {
   Parking.find()
@@ -91,3 +126,8 @@ exports.parking_update_one = (req, res, next) => {
       });
     });
 };
+
+
+
+
+      
