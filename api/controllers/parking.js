@@ -113,9 +113,20 @@ exports.parking_update_one = (req, res, next) => {
   Parking.update({ _id: id }, { $set: updateOps })
     .exec()
     .then(result => {
-      res.status(200).json({
+      Parking.find()
+      .exec()
+      .then(parkings => {
+        res.status(200).json({
           message: "Success",
-          updatedParking: result
+          parkings: parkings
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json({
+          message: "Failure",
+          error: err
+        });
       });
     })
     .catch(err => {
