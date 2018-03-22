@@ -24,9 +24,22 @@ exports.parking_reset_to_default = (req, res, next) => {
           parking
             .save()
       });
+      Parking.find()
+    .exec()
+    .then(parkings => {
+      console.log(parkings);
       res.status(200).json({
-        message: "Success"
+        message: "Success",
+        parkings: parkings
       });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        message: "Failure",
+        error: err
+      });
+    });
     })
     .catch(err => {
         res.status(500).json({
